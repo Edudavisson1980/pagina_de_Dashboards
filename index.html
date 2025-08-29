@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+
+    <title>Meus dashboards em Power BI</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #baf7d9; /* Azul claro */
+            margin: 0;
+            padding: 0;
+        }
+
+        h1, h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        h1 {
+            padding: 20px 0;
+        }
+
+        h2 {
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+
+        /* Diplomas principais */
+        .diplomas-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .diploma {
+            text-align: center;
+            width: 300px;
+        }
+
+        .diploma img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .diploma img:hover {
+            transform: scale(1.1);
+        }
+
+        .diploma p {
+            margin-top: 8px;
+            font-weight: bold;
+            color: #333;
+        }
+
+         /* ====== Mural ====== */
+    .mural {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 15px;
+      justify-items: center;
+    }
+
+    .mural-item {
+      width: 150px;
+      position: relative;
+      text-align: center;
+      overflow: visible; /* permite zoom sair pra fora */
+    }
+
+    .mural-item img {
+      width: 100%;
+      border-radius: 8px;
+      transition: transform 0.3s;
+      cursor: pointer;
+      display: block;
+      position: relative;
+      z-index: 1;
+    }
+
+    .mural-item img:hover {
+      transform: scale(1.5);
+      z-index: 10;
+    }
+
+    /* Responsividade */
+    @media (max-width: 600px) {
+      .diplomas {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+
+     .mural-item a {
+      text-decoration: none; /* remove sublinhado */
+      color: inherit;
+     }
+
+     a {
+    text-decoration: none;
+    color: inherit;
+}
+
+img {
+  max-width: 80%;
+  height: auto;
+}
+
+/* Modal para visualizar fotos */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  padding-top: 60px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.9);
+}
+
+.modal-conteudo {
+  margin: auto;
+  display: block;
+  max-width: 90%;
+  max-height: 80vh;
+  border-radius: 10px;
+}
+
+.fechar {
+  position: absolute;
+  top: 15px;
+  right: 25px;
+  color: #fff;
+  font-size: 35px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+
+    </style>
+</head>
+
+<!-- Modal para fotos -->
+<div id="modal" class="modal">
+  <span class="fechar">&times;</span>
+  <img class="modal-conteudo" id="imgModal">
+</div>
+
+
+<script>
+  var modal = document.getElementById("modal");
+  var modalImg = document.getElementById("imgModal");
+  var span = document.getElementsByClassName("fechar")[0];
+
+  // Adiciona evento para todas as imagens do site
+  document.querySelectorAll("img").forEach(function(img) {
+    img.addEventListener("click", function(){
+      modal.style.display = "block";
+      modalImg.src = this.src;
+    });
+  });
+
+  // Fecha ao clicar no X
+  span.onclick = function() { 
+    modal.style.display = "none";
+  }
+
+  // Fecha ao clicar fora da imagem
+  modal.onclick = function(e) {
+    if (e.target === modal) {
+      modal.style.display = "none";
+    }
+  }
+</script>
+
+<body>
+
+    <h1>Meus dashboards em Power BI</h1>
+
+    <!-- Diplomas principais -->
+    <div class="diplomas-container">
+        <div class="diploma">
+            <a href="C1.jpeg" target="_blank">
+                <img src="C1.jpeg" alt="Diploma Faculdade 1">
+                <p>Indicativos de venda com narrativa inteligente</p>
+            </a>
+        </div>
+        <div class="diploma">
+            <a href="C2.jpeg" target="_blank">
+                <img src="C2.jpeg" alt="Diploma Faculdade 2">
+                <p>Principais influenciadores nas vendas</p>
+            </a>
+        </div>
+        
+        <div class="diploma">
+            <a href="C3.jpeg" target="_blank">
+                <img src="C3.jpeg" alt="Curso técnico 3">
+                <p>Venda por categoria e PV</p>
+            </a>
+        </div>
+
+         <div class="diploma">
+            <a href="C4.jpeg" target="_blank">
+                <img src="C4.jpeg" alt="Diploma faculdade 4">
+                <p>Performance dos vendedores por região</p>
+            </a>
+        </div>
+
+        <div class="diplomas-container">
+        <div class="diploma">
+            <a href="C5.jpeg" target="_blank">
+                <img src="C5.jpeg" alt="Diploma Faculdade 1">
+                <p>Indicadores de receita , despesa e lucro</p>
+            </a>
+        </div>
+        <div class="diploma">
+            <a href="C6.jpeg" target="_blank">
+                <img src="C6.jpeg" alt="Diploma Faculdade 2">
+                <p>Análise do contas a pagar e receber </p>
+            </a>
+        </div>
+        
+        <div class="diploma">
+            <a href="C7.jpeg" target="_blank">
+                <img src="C7.jpeg" alt="Curso técnico 3">
+                <p>Lucro por data</p>
+            </a>
+        </div>
+
+         <div class="diploma">
+            <a href="C8.jpeg" target="_blank">
+                <img src="C8.jpeg" alt="Diploma faculdade 4">
+                <p>Realizado , Forecast e Budget (Previsão)</p>
+            </a>
+        </div>
+
+
+         <div class="diploma">
+            <a href="C9.jpeg" target="_blank">
+                <img src="C9.jpeg" alt="Diploma faculdade 4">
+                <p>Receitas , Custos , Despesas e Lucro</p>
+            </a>
+        </div>
+
+        <div class="diploma">
+            <a href="C10.jpeg" target="_blank">
+                <img src="C10.jpeg" alt="Diploma faculdade 4">
+                <p>Dashboard Analítico</p>
+            </a>
+        </div>
+
+        <div class="diploma">
+            <a href="C11.jpeg" target="_blank">
+                <img src="C11.jpeg" alt="Diploma faculdade 4">
+                <p>Visão do cliente</p>
+            </a>
+        </div>
+
+        <div class="diploma">
+            <a href="C12.jpeg" target="_blank">
+                <img src="C12.jpeg" alt="Diploma faculdade 4">
+                <p>Análise de dados de Logística</p>
+            </a>
+        </div>
+
+        <div class="diploma">
+            <a href="C13.jpeg" target="_blank">
+                <img src="C13.jpeg" alt="Diploma faculdade 4">
+                <p>Análise de dados de RH</p>
+            </a>
+        </div>
+
+        <div class="diploma">
+            <a href="C14.jpeg" target="_blank">
+                <img src="C14.jpeg" alt="Diploma faculdade 4">
+                <p>Dashboard Visão geral</p>
+            </a>
+        </div>
+
+
+
+
+
+        
+    </div>
+
+       
+
+
+
+         
+
+
+       
+
+
+
+
